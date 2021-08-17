@@ -1,4 +1,4 @@
-import java.util.Date;
+//Assignment 1, Nathan Borchelt
 import java.util.ArrayList;
 
 public class BorchelAssinment1 {
@@ -13,6 +13,15 @@ public class BorchelAssinment1 {
         Person nathan = new Person();
         nathan.userInfo("Nathan Borchelt", "November 27, 2002", "Ford vs Ferrari", personHobbies);
         System.out.println(nathan);
+
+        ArrayList<Website> favSites = new ArrayList<>();
+        favSites.add(new Website("Additing Games", "https://www.addictinggames.com/"));
+        favSites.add(new Website("Netflix", "https://www.netflix.com"));
+        favSites.add(new Website("YouTube", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+
+        for(Website w : favSites){
+            System.out.println(w);
+        }
     }
 
     public static class Website {
@@ -21,6 +30,10 @@ public class BorchelAssinment1 {
 
         public Website(String siteName, String siteURL) {
             this.siteName = siteName;
+            this.siteURL = siteURL;
+        }
+        public String toString(){
+            return siteName +" : "+siteURL;
         }
     }
 
