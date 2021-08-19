@@ -1,4 +1,4 @@
-//CSC 145 Assignment 1
+//CSC 145 Assignment 1 Nathan Borchelt
 public class Me {
     public static void main(String[] args) {
         String name = "Nathan Borchelt";
