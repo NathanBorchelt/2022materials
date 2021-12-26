@@ -4,31 +4,22 @@ public class Test {
 
 
    public static void main(String [] args){
-      Scanner scnr = new Scanner(System.in);
-      int result;
-      int stop;
-      int a;
-      int b;
-      
-      stop = scnr.nextInt();
-      result = 0;
-      
-      for (a = 0; a < 3; ++a) {
-         System.out.print(a + ": ");
-         for (b = 0; b < 4; ++b) {
-            result += a + b;
-            if (result > stop) {
-               System.out.print("_ ");
-               continue;
-            }
-            System.out.print(result + ",");
-         }
-         System.out.println();
-     }
+      try{
+          System.out.println(devide(5000, 0));
+      }
+      catch(Exception e){
+          System.err.println(e.getMessage());
+      }
    }
+    public static double devide(double numer, double denom){
+        if(denom == 0.){
+            throw new ArithmeticException("Cannot devide by Zero");
+        }
+        return numer/denom;
+    }
 }
+
 /*
-    
     public static double average(int[] input){
         double arrAverage=0;
         for(int i : input)

@@ -1,14 +1,17 @@
 //Nathan Borchelt
 //Assignment 7: Blackjack
-import java.util.ArrayList;
 public class Hand {
-    private static ArrayList<Card> hand;
+    private static Card[] hand;
     private int pointValue;
     public Hand(Card holdCard, Card faceCard){
-        hand = new ArrayList<>();
-        hand.add(holdCard);
-        hand.add(faceCard);
+        hand = new Card[12];
+        hand[0] = holdCard;
+        hand[1] = faceCard;
     }
+    public Hand(){
+        hand = new Card[12];
+    }
+
 
     public int getPoints(){
         pointValue = pointValueCalc(hand);
@@ -16,21 +19,31 @@ public class Hand {
     }
 
     public void drawCard(Deck deck){
-        hand.add(deck.dealCard());
+        int addIndex = 0;
+        for (int i = 0; i < hand.length; i++) {
+            if(hand[i] == null){
+                addIndex = i;
+                break;
+            }            
+        }
+        hand[addIndex] = deck.dealCard();
 
     }
 
-    private static int pointValueCalc(ArrayList<Card> hand){
+    private static int pointValueCalc(Card[] hand){
         int totalValue = 0;
         for(Card c : hand){
-            totalValue += c.getCardValue();
+            if ( c != null )
+                totalValue += c.getCardValue();
         }
         if(totalValue>21){
-            for(int i = 0; i < hand.size(); i++){
-                Card aceCheck = hand.get(i);
-                if(aceCheck.toString().contains("Ace") && aceCheck.getCardValue()!=1){
-                    aceCheck.hardHand();
-                    totalValue-=10;
+            for(int i = 0; i < hand.length; i++){
+                Card aceCheck = hand[i];
+                if ( aceCheck != null ){
+                    if(aceCheck.toString().contains("Ace") && aceCheck.getCardValue()!=1){
+                        aceCheck.hardHand();
+                        totalValue-=10;
+                    }
                 }
             }
         }
@@ -38,12 +51,11 @@ public class Hand {
     }
 
     public String toString(){
-        System.out.printf("%-10s: %s%n", "Hole Card",hand.get(0));
-        System.out.printf("%-10s: %s%n", "Up Card(s)", hand.get(1));
-        if(hand.size()>2){
-            for(int i = 2; i < hand.size(); i++){
-                System.out.printf("%-11s %s%n", "", hand.get(i));
-            }
+        System.out.printf("%-10s: %s%n", "Hole Card",hand[0]);
+        System.out.printf("%-10s: %s%n", "Up Card(s)", hand[1]);
+        for(int i = 2; i < hand.length; i++){
+            if (hand[i] != null)
+                System.out.printf("%-11s %s%n", "", hand[i]);
         }
         return "";
     }

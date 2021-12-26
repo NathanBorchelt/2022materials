@@ -12,15 +12,15 @@ public class Deck {
     private Random rand;
     public Deck(){
         
+        Card[] cardArray = new Card[52];
         rand = new Random();
-        deckOfCards = new Card[52];
         String[] suits = {"Diamonds", "Spades","Hearts","Clubs"};
         String[] faceName = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
         int[] faceValue = {11,2,3,4,5,6,7,8,9,10,10,10,10};
 
         for(int i = 0; i < suits.length; i++){
             for(int j = 0; j < faceName.length; j++){
-                deckOfCards[((i*13)+j)] = new Card(suits[i],faceName[j],faceValue[j]);
+                cardArray[((i*13)+j)] = new Card(suits[i],faceName[j],faceValue[j]);
             }
         }
         //https://www.journaldev.com/32661/shuffle-array-java
@@ -29,9 +29,9 @@ public class Deck {
             cardList.add(i);
         }
         Collections.shuffle(cardList);
-        Card[] tempDeck = deckOfCards.clone();
+        Card[] tempDeck = cardArray.clone();
         for (int i = 0; i < tempDeck.length; i++) {
-            tempDeck[i] = deckOfCards[cardList.get(i)];
+            tempDeck[i] = cardArray[cardList.get(i)];
         }
         deckOfCards = tempDeck;
     }
@@ -41,7 +41,14 @@ public class Deck {
     }
 
     public Card dealCard(){
-        return deckOfCards[rand.nextInt(52)];
+        int randCardIndex = rand.nextInt(deckOfCards.length);
+        Card dealtCard = deckOfCards[randCardIndex];
+        while (deckOfCards[randCardIndex] == null){
+            randCardIndex = rand.nextInt(deckOfCards.length);
+            dealtCard= deckOfCards[randCardIndex];
+        }
+        deckOfCards[randCardIndex]= null;
+        return dealtCard;
     }
 
     public String toString() {
