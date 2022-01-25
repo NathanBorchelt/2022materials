@@ -1,9 +1,9 @@
-public class Widget {
-    private int value;
-    public Widget(int v){
+public class Widget<T> {
+    private T value;
+    public Widget(T v){
         value = v;
     }
-    public int getValue() {
+    public T getValue() {
         return value;
     }
 }
