@@ -5,7 +5,7 @@ public class HelloWorld {
         System.out.println(car);
         Car myCar = new Car("Scion", "tC", (short)2013);
         System.out.println(myCar);
-        Widget w = new Widget(9682);
+        Widget<String> w = new Widget<>("9682");
         System.out.println(w.getValue());
     }
 }
