@@ -5,10 +5,10 @@ public class Game {
         Random random = new Random();
         //three character all with random stats in order to show multiple results
         Warrior warrior = new Warrior("Kratos", 50+random.nextInt(101), 1+random.nextInt(20), 10+random.nextInt(16));
-        Wizzard wizzard = new Wizzard("Merlin", 50+random.nextInt(101), 1+random.nextInt(20), 10+random.nextInt(16));
+        Wizard wizard = new Wizard("Merlin", 50+random.nextInt(101), 1+random.nextInt(20), 10+random.nextInt(16));
         Archer archer = new Archer("Sterling", 50+random.nextInt(101), 1+random.nextInt(20), 10+random.nextInt(16));
         ArrayList<GameCharacter> activeFighters = new ArrayList<>();//an array for looping combat and potential for infinite combatants
-        activeFighters.add(wizzard);
+        activeFighters.add(wizard);
         activeFighters.add(warrior);
         activeFighters.add(archer);
         int turn = 0;// a variable for indexing through all the combatants

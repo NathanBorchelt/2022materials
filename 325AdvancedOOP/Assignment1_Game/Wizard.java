@@ -1,9 +1,9 @@
-public class Wizzard extends GameCharacter {
+public class Wizard extends GameCharacter {
     private int mana;
-    public Wizzard(String n, int h, int d) {
+    public Wizard(String n, int h, int d) {
         super(n, h, d);
     }
-    public Wizzard(String n, int h, int d, int m) {
+    public Wizard(String n, int h, int d, int m) {
         super(n, h, d);
         mana = m;
     }
@@ -32,4 +32,3 @@ public class Wizzard extends GameCharacter {
         return (super.toString()+"\nMana: "+mana);
     }
 }
-
