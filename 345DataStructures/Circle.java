@@ -4,7 +4,7 @@ public class Circle implements Shape {
         radius = r;
     }
     public double getArea(){
-        return Math.PI*radius*radius
+        return Math.PI*radius*radius;
     }
     public double getCircumference(){
         return getPerimeter();

@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Runner {
     public static void main(String[] args) {
         BankAccount[] bankAccountArray = {new BankAccount(234.71), new BankAccount(2340.76), new BankAccount(934.34)};
@@ -7,6 +10,23 @@ public class Runner {
         System.out.println(average(bankAccountArray));
         System.out.println(average(carArray));
         System.out.println(average(countryArray));
+
+        System.out.println();
+
+        System.out.println(Arrays.toString(bankAccountArray));
+        System.out.println(Arrays.toString(carArray));
+        System.out.println(Arrays.toString(countryArray));
+
+        Arrays.sort(bankAccountArray);
+        Arrays.sort(carArray);
+        Arrays.sort(countryArray);
+
+        System.out.println();
+
+        System.out.println(Arrays.toString(bankAccountArray));
+        System.out.println(Arrays.toString(carArray));
+        System.out.println(Arrays.toString(countryArray));
+
     }
     public void printMeasure(Measurable m) {
         System.out.println(m.getMeasure());
@@ -19,4 +39,5 @@ public class Runner {
         }
         return sum / objs.length;
     }
+
 }
