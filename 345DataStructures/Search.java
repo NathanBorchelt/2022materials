@@ -2,7 +2,7 @@
 //CSC 345 Assignment 2
 
 public class Search {
-    public int findMin(int[] intArray){
+    public static int findMin(int[] intArray){
         int minValue;
         try{
             minValue = intArray[0];
@@ -18,10 +18,25 @@ public class Search {
                 minValue = intArray[i];
             }
         }
-        return index
+        return index;
     }
-    public T findMin(Comparable<T>[] comparables){
-
+    public static <T extends Comparable<T>> int findMin(T[] comparables){
+        T minValue;
+        try{
+            minValue = comparables[0];
+        }
+        catch(Exception e){
+            System.err.println(e);
+            return -1;
+        }
+        int index = 0;
+        for(int i = 0; i < comparables.length; i++){
+            if(comparables[i].compareTo(minValue)<0){
+                minValue = comparables[i];
+                index = i;
+            }
+        }
+        return index;
     }
 
 }
