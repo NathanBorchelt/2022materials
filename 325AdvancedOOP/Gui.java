@@ -3,28 +3,35 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class Gui {
-    private JFrame frame = new JFrame("Our First GUI");
+public class Gui extends JFrame {
     private JButton button = new JButton("Click Me!!!");
     private JPanel panel = new JPanel();
     private JLabel label1 = new JLabel("Default Text 1");
     private JTextField textField = new JTextField("Field Text");
-    private JTextArea textArea = new JTextArea("Area Text");
+    private JTextArea textArea = new JTextArea(4,4);
+    private JScrollPane scrollPane = new JScrollPane(textArea);
 
     public Gui(){
-        frame.add(panel);
+        this.add(panel);
         panel.add(button);
         panel.add(label1);
-        panel.add(textArea);
+        panel.add(scrollPane);
         panel.add(textField);
-        button.addActionListener(new ButtonListener());
-        frame.setVisible(true);
-        frame.setSize(400,600);
+        this.setVisible(true);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         //frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        button.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                JOptionPane.showMessageDialog(null, "You clicked Me");
+                label1.setText(textField.getText());
+                textArea.append(textField.getText());
+            }
+        });
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {
         Gui g = new Gui();
+        g.setSize(400,400);
     }
 
     public class ButtonListener implements ActionListener{
