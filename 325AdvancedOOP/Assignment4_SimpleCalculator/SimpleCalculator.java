@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class SimpleCalculator extends JFrame {
     private GridLayout buttonLayoutTop = new GridLayout(3,4);
@@ -41,11 +42,13 @@ public class SimpleCalculator extends JFrame {
         inputButtons = new JCalcButton[totalButtons];
         for(int i = 0; i< buttonTextTop.length; i++){
             inputButtons[i] = new JCalcButton(buttonTextTop[i],new NumberConcatListener());
+            inputButtons[i].setFont(new Font("Courier",Font.PLAIN,30));
             buttonPanelTop.add(inputButtons[i]);
 
         }
         for(int i = 0; i< buttonTextBottom.length; i++){
             inputButtons[buttonTextTop.length+i] = new JCalcButton(buttonTextBottom[i],new NumberConcatListener());
+            inputButtons[buttonTextTop.length+i].setFont(new Font("Courier",Font.PLAIN,30));
             buttonPanelBottom.add(inputButtons[buttonTextTop.length+i]);
 
         }
@@ -58,6 +61,8 @@ public class SimpleCalculator extends JFrame {
         inputButtons[14].changeActionListener(new BackspaceListener());
         inputButtons[17].changeActionListener(new ClearListener());
         this.setSize(640,480);
+        ioLine.setFont(new Font("Courier", Font.BOLD,55));
+        this.setTitle("Borchelt Calculator");
         this.setVisible(true);
         this.setResizable(false);
         this.setDefaultCloseOperation(SimpleCalculator.EXIT_ON_CLOSE);
@@ -65,6 +70,7 @@ public class SimpleCalculator extends JFrame {
 
     public static void concatNumbers(ActionEvent e){
         ioLine.setText(ioLine.getText().concat(((JCalcButton)e.getSource()).toString()));
+        newNumber = false;
     }
 
     public static double doOperation(){
@@ -99,7 +105,6 @@ public class SimpleCalculator extends JFrame {
     }
 
     public class OperanListener implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             JCalcButton operanButton = (JCalcButton)e.getSource();
@@ -132,49 +137,41 @@ public class SimpleCalculator extends JFrame {
         }
     }
 
-        public class EqualListener implements ActionListener{
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(hitEqual){
-                    previousNumber = Double.valueOf(ioLine.getText());
-                }
-                double output = doOperation();
-                if(output%1.0==0){
-                    ioLine.setText(String.valueOf(Math.round(output)));
-                }
-                else
-                    ioLine.setText(String.valueOf(output));
-                hitEqual = true;
-
-            }}
-        public class DotConcatListener implements ActionListener{
-
+    public class EqualListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(ioLine.getText().equals("") || newNumber){
+            if(hitEqual){
+                previousNumber = Double.valueOf(ioLine.getText());
+            }
+            double output = doOperation();
+            if(output%1.0==0){
+                ioLine.setText(String.valueOf(Math.round(output)));
+            }
+            else
+                ioLine.setText(String.valueOf(output));
+            hitEqual = true;
+        }
+    }
+    public class DotConcatListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(ioLine.getText().equals("")){
                 ioLine.setText("0");
             }
             if(!ioLine.getText().contains(".")){
                 concatNumbers(e);
             }
-
         }
-
     }
 
     public class ClearListener implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             ioLine.setText("0");
             previousNumber = 0;
-
         }
-
     }
     public class BackspaceListener implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             String input = ioLine.getText();
@@ -187,5 +184,4 @@ public class SimpleCalculator extends JFrame {
         }
 
     }
-
 }
