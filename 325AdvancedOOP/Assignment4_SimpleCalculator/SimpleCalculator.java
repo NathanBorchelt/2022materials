@@ -52,6 +52,7 @@ public class SimpleCalculator extends JFrame {
             buttonPanelBottom.add(inputButtons[buttonTextTop.length+i]);
 
         }
+        //seperate listeners for cleaner code
         inputButtons[3].changeActionListener(new OperanListener());
         inputButtons[7].changeActionListener(new OperanListener());
         inputButtons[15].changeActionListener(new OperanListener());
@@ -60,6 +61,7 @@ public class SimpleCalculator extends JFrame {
         inputButtons[12].changeActionListener(new DotConcatListener());
         inputButtons[14].changeActionListener(new BackspaceListener());
         inputButtons[17].changeActionListener(new ClearListener());
+        ioLine.setEditable(false);
         this.setSize(640,480);
         ioLine.setFont(new Font("Courier", Font.BOLD,55));
         this.setTitle("Borchelt Calculator");
@@ -82,6 +84,7 @@ public class SimpleCalculator extends JFrame {
             return previousNumber*Double.valueOf(ioLine.getText());
         else{
             Double divCalc = previousNumber/Double.valueOf(ioLine.getText());
+            //dividing by a floating point 0.0 will output infinity instead of a DivideByZeroException
             if(divCalc.equals(Double.POSITIVE_INFINITY) || divCalc.equals(Double.NEGATIVE_INFINITY)){
                 JOptionPane.showMessageDialog(null, "You cannot divide by 0", "Div0Err", JOptionPane.ERROR_MESSAGE);
                 return 0;
@@ -108,32 +111,35 @@ public class SimpleCalculator extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             JCalcButton operanButton = (JCalcButton)e.getSource();
-            previousNumber = Double.valueOf(ioLine.getText());
             if(!hitEqual){
+                //cleanup so the output does not have unnecessary zeros otherwise just output
                 double output = doOperation();
                 if(output%1.0==0){
                     ioLine.setText(String.valueOf(Math.round(output)));
                 }
                 else
-                    ioLine.setText(String.valueOf(doOperation()));
+                    ioLine.setText(String.valueOf(output));
             }
-            if (operanButton.getText().equals("+")) {
-                hitEqual = false;
-                operan = ADD;
+            else{
+                previousNumber = Double.valueOf(ioLine.getText());
+                if (operanButton.getText().equals("+")) {
+                    hitEqual = false;
+                    operan = ADD;
+                }
+                else if (operanButton.getText().equals("-")) {
+                    hitEqual = false;
+                    operan = MINUS;
+                }
+                else if (operanButton.getText().equals("x")) {
+                    hitEqual = false;
+                    operan = TIMES;
+                }
+                else if (operanButton.getText().equals("/")){
+                    hitEqual = false;
+                    operan = DIVIDE;
+                }
+                newNumber = true;
             }
-            else if (operanButton.getText().equals("-")) {
-                hitEqual = false;
-                operan = MINUS;
-            }
-            else if (operanButton.getText().equals("x")) {
-                hitEqual = false;
-                operan = TIMES;
-            }
-            else if (operanButton.getText().equals("/")){
-                hitEqual = false;
-                operan = SimpleCalculator.DIVIDE;
-            }
-            newNumber = true;
         }
     }
 
@@ -141,20 +147,23 @@ public class SimpleCalculator extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(hitEqual){
-                previousNumber = Double.valueOf(ioLine.getText());
+                ioLine.setText(String.valueOf(doOperation()));
             }
-            double output = doOperation();
-            if(output%1.0==0){
-                ioLine.setText(String.valueOf(Math.round(output)));
+            else{
+                double output = doOperation();
+                if(output%1.0==0){
+                    ioLine.setText(String.valueOf(Math.round(output)));
+                }
+                else
+                    ioLine.setText(String.valueOf(output));
+                hitEqual = true;
             }
-            else
-                ioLine.setText(String.valueOf(output));
-            hitEqual = true;
         }
     }
     public class DotConcatListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            //a check to either have 0.# or #.# and not have multiple dots in the number
             if(ioLine.getText().equals("")){
                 ioLine.setText("0");
             }
@@ -174,6 +183,7 @@ public class SimpleCalculator extends JFrame {
     public class BackspaceListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            //deletes characters from right to left until the number is gone and defaults to 0
             String input = ioLine.getText();
             if(!(input.length()==0)){
                 ioLine.setText(input.substring(0,input.length()-1));
