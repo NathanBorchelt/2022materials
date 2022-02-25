@@ -1,8 +1,8 @@
 public interface Stack<T> {
     void push(T value);
     void pop();
-    T peak();
-    int size();
+    T peek();
+    int getSize();
     boolean isEmpty();
 
 }

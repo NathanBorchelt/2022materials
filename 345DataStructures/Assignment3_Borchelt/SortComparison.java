@@ -1,3 +1,6 @@
+//Nathan Borchelt
+//Assignment 3
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -7,31 +10,36 @@ public class SortComparison {
         //long unixTime = System.currentTimeMillis()
         long[] timeTaken = new long[15];
 
-        Integer[] intArray = new Integer[2048];
+        Integer[] intArrayS = new Integer[0];
+        Integer[] intArrayI = new Integer[0];
+        Integer[] intArrayB = new Integer[0];
         int outIndex = 0;
         long unixTime = System.currentTimeMillis();
         for(int i = 2048; i < 32769; i*=2){
-            arrayReset(intArray, i);
-            randomArray(intArray);
+            intArrayS = new Integer[i];
+            intArrayI = new Integer[i];
+            intArrayB = new Integer[i];
+
+            for(int j = 0; j < intArrayS.length; j++){
+                intArrayS[j] = random.nextInt();
+            }
+            intArrayI = intArrayS.clone();
+            intArrayB = intArrayS.clone();
+
             unixTime = System.currentTimeMillis();
-            Sorting.selectionSort(intArray);
+            Sorting.selectionSort(intArrayS);
             timeTaken[outIndex] = System.currentTimeMillis() - unixTime;
             outIndex++;
 
-            arrayReset(intArray, i);
-            randomArray(intArray);
             unixTime = System.currentTimeMillis();
-            Sorting.insertionSort(intArray);
+            Sorting.insertionSort(intArrayI);
             timeTaken[outIndex] = System.currentTimeMillis() - unixTime;
             outIndex++;
 
-            arrayReset(intArray, i);
-            randomArray(intArray);
             unixTime = System.currentTimeMillis();
-            Sorting.bubbleSort(intArray);
+            Sorting.bubbleSort(intArrayB);
             timeTaken[outIndex] = System.currentTimeMillis() - unixTime;
-            outIndex++;
-
+            outIndex++;;
         }
         System.out.printf("%-7s\t%-11s\t%-11s\t%-11s", "n","Selection","Insertion","Bubble");
         System.out.println();
@@ -45,11 +53,6 @@ public class SortComparison {
             outIndex+=3;
             System.out.println();
         }
-    }
-
-    public static void arrayReset(Integer[] objArray, int length){
-        objArray = null;
-        objArray = new Integer[length];
     }
 
     public static void randomArray(Integer[] objArray){
