@@ -8,12 +8,14 @@ public class ArrayStack<T> implements Stack<T> {
         size = 0;
     }
 
+    @SuppressWarnings("unchecked")
     public void push(T value){
         if(size = values.length){
             valuesTemp = (T[])(new Object[size*2]);
             for(int i = 0; i<value.length; i++){
                 valuesTemp[i] = values[i];
             }
+            values = valuesTemp;
         }
         values[size] = value;
         size++;
@@ -40,6 +42,18 @@ public class ArrayStack<T> implements Stack<T> {
     }
     public boolean isEmpty(){
         return size==0;
+    }
+
+    public T takeOut(){
+        try{
+            T removingVal = values[size-1];
+            values[size-1] = null;
+            size--;
+            return removingVal;
+        }
+        catch (Exception e){
+            throw new RuntimeException("Cannot Peek Empty ArrayStack");
+        }
     }
 
     public String toString() {
