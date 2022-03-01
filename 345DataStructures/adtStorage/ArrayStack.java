@@ -8,17 +8,21 @@ public class ArrayStack<T> implements Stack<T> {
         size = 0;
     }
 
-    @SuppressWarnings("unchecked")
     public void push(T value){
-        if(size = values.length){
-            valuesTemp = (T[])(new Object[size*2]);
-            for(int i = 0; i<value.length; i++){
-                valuesTemp[i] = values[i];
-            }
-            values = valuesTemp;
+        if(size == values.length){
+            expandCapacity();
         }
         values[size] = value;
         size++;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void expandCapacity(){
+        T[] valuesTemp = (T[])(new Object[size*2]);
+        for(int i = 0; i<values.length; i++){
+            valuesTemp[i] = values[i];
+        }
+        values = valuesTemp;
     }
     public void pop(){
         try{
@@ -52,16 +56,18 @@ public class ArrayStack<T> implements Stack<T> {
             return removingVal;
         }
         catch (Exception e){
-            throw new RuntimeException("Cannot Peek Empty ArrayStack");
+            throw new RuntimeException("Cannot Take From Empty ArrayStack");
         }
     }
 
     public String toString() {
         String outString = "[";
-        for(int i = 0; i <size-1; i++){
+        for(int i = size-1; i >0; i--){
             outString += values[i]+", ";
         }
-        outString += values[size-1]+"]";
+        if(values[0] != null)
+            outString += values[0];
+        outString += "]";
         return outString;
     }
 }
