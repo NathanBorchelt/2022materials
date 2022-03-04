@@ -1,19 +1,11 @@
 public class StackTesting {
     public static void main(String[] args) {
-        ArrayStack<Integer> intStack = new ArrayStack<>();
+        LinkedStack<Integer> lnkStk = new  LinkedStack<>();
 
-        for (int i = 0; i <30; i++){
-            intStack.push(i);
+        for (int i = 0; i < 10; i++){
+            lnkStk.push(i);
         }
-        System.out.println(intStack.peek());
 
-        intStack.pop();
-        System.out.println(intStack.peek());
-        System.out.println(intStack.takeOut());
-
-        System.out.println(intStack);
-
-        ArrayStack<Integer> intStack2 = new ArrayStack<>();
-        System.out.println(intStack2);
+        System.out.println(lnkStk);
     }
 }

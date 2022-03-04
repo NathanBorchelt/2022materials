@@ -7,6 +7,7 @@ import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+@SuppressWarnings("all")
 public class JListDemo extends JFrame {
 
     public JListDemo() {
@@ -16,7 +17,7 @@ public class JListDemo extends JFrame {
         setLayout(new FlowLayout());
         final JLabel label = new JLabel("Update");
         String[] data = { "one", "two", "three", "four" };
-        final JList dataList = new JList(data);
+        final JList<String>  dataList = new JList<>(data);
 
         dataList.addListSelectionListener(new ListSelectionListener() {
 
