@@ -29,52 +29,10 @@ public class ContentCopy extends JFrame{
         setVisible(true);
     }
 
-    public void addSourceElements(Object newValue[]) {
-        fillListModel(sourceListModel, newValue);
-      }
-      public void setSourceElements(Object newValue[]) {
-        clearSourceListModel();
-        addSourceElements(newValue);
-      }
-      public void addDestinationElements(Object newValue[]) {
-        fillListModel(destListModel, newValue);
-      }
-      private void fillListModel(SortedListModel model, Object newValues[]) {
-        model.addAll(newValues);
-      }
-
-      public class FileManagmentButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-
-            //Handle open button action.
-            if (e.getSource() == openButton) {
-                int returnVal = fc.showOpenDialog(FileChooserDemo.this);
-
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-                    in = new Scanner(file);
-                    while(in.hasNextLine()){
-                        listIn.add(in.nextLine());
-                    }
-                } else {
-                    log.append("Open command cancelled by user." + "\n");
-                }
-                log.setCaretPosition(log.getDocument().getLength());
-
-            //Handle save button action.
-            } else if (e.getSource() == saveButton) {
-                int returnVal = fc.showSaveDialog(FileChooserDemo.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-                    //This is where a real application would save the file.
-                    log.append("Saving: " + file.getName() + "." + "\n");
-                } else {
-                    log.append("Save command cancelled by user." + "\n");
-                }
-                log.setCaretPosition(log.getDocument().getLength());
-            }
-        }
+    public static void main(String[] args) {
+      ContentCopy cc = new ContentCopy();
     }
+
     private class AddButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
           Object selected[] = sourceList.getSelectedValues();
