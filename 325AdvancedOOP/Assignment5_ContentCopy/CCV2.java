@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.awt.GridLayout;
 
 
-public class CCV2 extends JFrame{
+public class CCV2 extends JFrame implements ActionListener{
     private JList<Content<String>> inJList;
     private JList<Content<String>> outJList;
     private JMenuBar menubar;
@@ -53,8 +53,8 @@ public class CCV2 extends JFrame{
         loadOption = new JMenu("Load...");
         saveOption = new JMenu("Save As...");
 
-        loadOption.addActionListener(new FileChooserListener());
-        saveOption.addActionListener(new FileChooserListener());
+        loadOption.addActionListener(this);
+        saveOption.addActionListener(this);
 
         fc = new JFileChooser();
 
@@ -81,6 +81,93 @@ public class CCV2 extends JFrame{
         centerPanel.add(spacingLabel);
         mainPanel.add(outJList);
 
+    }
+
+    @SuppressWarnings("unchecked")
+    public void actionPerformed(ActionEvent e) {
+
+        //Handle open button action.
+        System.out.println("file chooser listened");
+        if (e.getSource() == loadOption) {
+            int returnVal = fc.showOpenDialog(CCV2.this);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                //This is where a real application would open the file.
+                loadSuccess.setText("Opening: " + file.getName());
+                BufferedReader objReader = null;
+                try {
+                    String strCurrentLine;
+                    int index = 0;
+                    objReader = new BufferedReader(new FileReader(file));
+                    while ((strCurrentLine = objReader.readLine()) != null) {
+                        ((DefaultListModel)(inJList.getModel())).addElement(new Content<String>(strCurrentLine,index));
+                        index++;
+                    }
+                }
+                catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                    loadSuccess.setText("Error reading from " + file.getName());
+                }
+                finally {
+                try {
+                    if (objReader != null)
+                    objReader.close();
+                }
+                catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                    loadSuccess.setText("Failed to close " + file.getName());
+                }
+                }
+            }
+            else {
+                loadSuccess.setText("Open command cancelled by user.");
+            }
+
+        //Handle save button action.
+        }
+
+        else if (e.getSource() == saveOption) {
+            int returnVal = fc.showSaveDialog(CCV2.this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+
+                try{
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                }
+                catch (Exception exce){
+                    System.err.println(exce.getMessage());
+                    loadSuccess.setText("Error creating new file for saving");
+                }
+
+                BufferedWriter bw = null;
+
+                try{
+                    FileWriter fw = new FileWriter(file);
+                    bw = new BufferedWriter(fw);
+                }
+                catch (Exception excep){
+                    System.err.println(excep.getMessage());
+                    loadSuccess.setText("Error attempting to write to file");
+                }
+
+                try{
+                    for(Content<String> content: ((Content<String>[])((DefaultListModel)(outJList.getModel())).toArray())){
+                        bw.write(content.getContent());
+                        bw.newLine();
+                    }
+                }
+                catch(Exception exc){
+                    System.err.println(exc.getMessage());
+                    loadSuccess.setText("Failed to save to " + file.getName());
+                }
+            }
+            else {
+                loadSuccess.setText("Save command cancelled by user.");
+            }
+        }
     }
     @SuppressWarnings("unchecked")
     private class AddItemsListener implements ActionListener{
@@ -123,95 +210,6 @@ public class CCV2 extends JFrame{
             }
             catch(Exception removeException){
                 loadSuccess.setText("There is no file loaded");
-            }
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private class FileChooserListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-
-            //Handle open button action.
-            System.out.println("file chooser listened");
-            if (e.getSource() == loadOption) {
-                int returnVal = fc.showOpenDialog(CCV2.this);
-
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-                    //This is where a real application would open the file.
-                    loadSuccess.setText("Opening: " + file.getName());
-                    BufferedReader objReader = null;
-                    try {
-                        String strCurrentLine;
-                        int index = 0;
-                        objReader = new BufferedReader(new FileReader(file));
-                        while ((strCurrentLine = objReader.readLine()) != null) {
-                            ((DefaultListModel)(inJList.getModel())).addElement(new Content<String>(strCurrentLine,index));
-                            index++;
-                        }
-                    }
-                    catch (Exception ex) {
-                        System.err.println(ex.getMessage());
-                        loadSuccess.setText("Error reading from " + file.getName());
-                    }
-                    finally {
-                    try {
-                        if (objReader != null)
-                        objReader.close();
-                    }
-                    catch (Exception ex) {
-                        System.err.println(ex.getMessage());
-                        loadSuccess.setText("Failed to close " + file.getName());
-                    }
-                    }
-                }
-                else {
-                    loadSuccess.setText("Open command cancelled by user.");
-                }
-
-            //Handle save button action.
-            }
-
-            else if (e.getSource() == saveOption) {
-                int returnVal = fc.showSaveDialog(CCV2.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-
-                    try{
-                        if (!file.exists()) {
-                            file.createNewFile();
-                        }
-                    }
-                    catch (Exception exce){
-                        System.err.println(exce.getMessage());
-                        loadSuccess.setText("Error creating new file for saving");
-                    }
-
-                    BufferedWriter bw = null;
-
-                    try{
-                        FileWriter fw = new FileWriter(file);
-                        bw = new BufferedWriter(fw);
-                    }
-                    catch (Exception excep){
-                        System.err.println(excep.getMessage());
-                        loadSuccess.setText("Error attempting to write to file");
-                    }
-
-                    try{
-                        for(Content<String> content: ((Content<String>[])((DefaultListModel)(outJList.getModel())).toArray())){
-                            bw.write(content.getContent());
-                            bw.newLine();
-                        }
-                    }
-                    catch(Exception exc){
-                        System.err.println(exc.getMessage());
-                        loadSuccess.setText("Failed to save to " + file.getName());
-                    }
-                }
-                else {
-                    loadSuccess.setText("Save command cancelled by user.");
-                }
             }
         }
     }

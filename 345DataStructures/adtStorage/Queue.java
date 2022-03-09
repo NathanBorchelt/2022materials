@@ -1,3 +1,7 @@
 public interface Queue<T> {
-    void enqueue()
+    public void push(T value);
+    public void pop();
+    public T peek();
+    public int size();
+    public boolean isEmpty();
 }
