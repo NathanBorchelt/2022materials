@@ -39,7 +39,7 @@ public class CCV2 extends JFrame implements ActionListener{
 
         JPanel mainPanel = new JPanel(new GridLayout(1,3));
 
-        spacingLabel = new JLabel(" ");
+        spacingLabel = new JLabel("\t");
         JPanel centerPanel = new JPanel(new GridLayout(5,1));
 
         inJList = new JList<>();
@@ -74,7 +74,7 @@ public class CCV2 extends JFrame implements ActionListener{
         add(mainPanel);
         mainPanel.add(inJList);
         mainPanel.add(centerPanel);
-        centerPanel.add(spacingLabel);
+        centerPanel.add(loadSuccess);
         centerPanel.add(addButton);
         centerPanel.add(spacingLabel);
         centerPanel.add(removeButton);

@@ -11,8 +11,29 @@ public class ChartViewer
       frame.setSize(400,400);
       frame.setTitle("a bar chart");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setVisible(true);
       JComponent component=new ChartComponent();
       frame.add(component);
-      frame.setVisible(true);
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
+      frame.add(new ChartComponent());
    }
 }
