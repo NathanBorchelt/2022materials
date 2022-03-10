@@ -9,9 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
-import java.util.Comparator;
 import java.awt.GridLayout;
-
 
 public class CCV2 extends JFrame{
     private JList<Content<String>> inJList;
@@ -76,7 +74,7 @@ public class CCV2 extends JFrame{
         mainPanel.add(centerPanel);
         centerPanel.add(spacingLabel);
         centerPanel.add(addButton);
-        centerPanel.add(spacingLabel);
+        centerPanel.add(loadSuccess);
         centerPanel.add(removeButton);
         centerPanel.add(spacingLabel);
         mainPanel.add(outJList);
@@ -134,7 +132,7 @@ public class CCV2 extends JFrame{
             //Handle open button action.
             System.out.println("file chooser listened");
             if (e.getSource() == loadOption) {
-                int returnVal = fc.showOpenDialog(CCV2.this);
+                int returnVal = fc.showOpenDialog(null);
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fc.getSelectedFile();
