@@ -21,11 +21,16 @@ public class LinkedQueue<T> implements Queue<T> {
     }
     public void pop(){
         if(size == 0)
-            throw new Exception("Cannot Pop Empty Queue");
+            throw new RuntimeException("Cannot Pop Empty Queue");
+        if(size==1)
+            back=null;
+        front = front.getNext();
+        size--;
+
     }
     public T peek(){
         if(size == 0)
-            throw new Exception("Cannot Peek Empty Queue");
+            throw new RuntimeException("Cannot Peek Empty Queue");
         return front.getValue();
     }
     public int size(){
@@ -39,11 +44,11 @@ public class LinkedQueue<T> implements Queue<T> {
     public String toString() {
         String outString = "[ ";
         Node<T> current = front;
-        while(!(current.getNext().equals(back)) && head!=null){
+        while(front != null && (current.getNext()!=null)){
             outString += current.getValue() + ", ";
             current = current.getNext();
         }
-        outString += back.getValue() + " ]";
+        outString += (back!=null ? back.getValue():"") + " ]";
         return outString;
     }
 }
