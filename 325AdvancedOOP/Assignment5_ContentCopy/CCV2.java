@@ -1,6 +1,11 @@
+/**
+ * A known bug is the way the load and save options appear on top of the first line and then disappear.
+ * The objects behind are near impossible to click on but while Menubar items do visually disappear
+ * they are still clickable.
+ */
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.File;
 import java.util.List;
@@ -20,8 +25,8 @@ import java.awt.GridLayout;
 
 
 public class CCV2 extends JFrame implements ActionListener{
-    private JList<Content<String>> inJList;
-    private JList<Content<String>> outJList;
+    private JList<String> inJList;
+    private JList<String> outJList;
     private JMenuBar menubar;
     private JMenuItem loadOption;
     private JMenuItem saveOption;
@@ -40,8 +45,8 @@ public class CCV2 extends JFrame implements ActionListener{
         setSize(640,480);
 
         setDefaultCloseOperation(CCV2.EXIT_ON_CLOSE);
-        DefaultListModel<Content<String>> inModel = new DefaultListModel<>();
-        DefaultListModel<Content<String>> outModel = new DefaultListModel<>();
+        DefaultListModel<String> inModel = new DefaultListModel<>();
+        DefaultListModel<String> outModel = new DefaultListModel<>();
 
         JPanel mainPanel = new JPanel(new GridLayout(1,3));
 
@@ -92,7 +97,6 @@ public class CCV2 extends JFrame implements ActionListener{
 
     }
 
-    @SuppressWarnings("unchecked")
     public void actionPerformed(ActionEvent e) {
 
         //Handle open button action.
@@ -106,11 +110,9 @@ public class CCV2 extends JFrame implements ActionListener{
                 BufferedReader objReader = null;
                 try {
                     String strCurrentLine;
-                    int index = 0;
                     objReader = new BufferedReader(new FileReader(file));
                     while ((strCurrentLine = objReader.readLine()) != null) {
-                        ((DefaultListModel)(inJList.getModel())).addElement(new Content<String>(strCurrentLine,index));
-                        index++;
+                        ((DefaultListModel<String>)(inJList.getModel())).addElement(strCurrentLine);
                     }
                 }
                 catch (Exception ex) {
@@ -150,11 +152,11 @@ public class CCV2 extends JFrame implements ActionListener{
                     loadSuccess.setText("Error creating new file for saving");
                 }
 
-                BufferedWriter bw = null;
+                PrintWriter pw = null;
 
                 try{
-                    FileWriter fw = new FileWriter(file);
-                    bw = new BufferedWriter(fw);
+                    //BufferedWriter was not working for me, I substituted it for PrintWriter
+                    pw = new PrintWriter(new FileWriter(file,true));
                 }
                 catch (Exception excep){
                     System.err.println(excep.getMessage());
@@ -162,11 +164,11 @@ public class CCV2 extends JFrame implements ActionListener{
                 }
 
                 try{
-                    for(Object content: ((DefaultListModel)(outJList.getModel())).toArray()){
-                        bw.write(content.toString());
-                        bw.newLine();
+                    for(Object content: ((DefaultListModel<String>)(outJList.getModel())).toArray()){
+                        pw.print(content.toString()+"\n");
 
                     }
+                    pw.close();
                 }
                 catch(Exception exc){
                     System.err.println(exc.getMessage());
@@ -178,14 +180,14 @@ public class CCV2 extends JFrame implements ActionListener{
             }
         }
     }
-    @SuppressWarnings("unchecked")
+
     private class AddItemsListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             try{
-                List<Content<String>> moving = inJList.getSelectedValuesList();
-                for(Content<String> content: moving){
-                    ((DefaultListModel)inJList.getModel()).removeElement(content);
-                    ((DefaultListModel)outJList.getModel()).addElement(content);
+                List<String> moving = inJList.getSelectedValuesList();
+                for(String content: moving){
+                    ((DefaultListModel<String>)inJList.getModel()).removeElement(content);
+                    ((DefaultListModel<String>)outJList.getModel()).addElement(content);
                 }
             }
             catch(Exception addException){
@@ -193,14 +195,14 @@ public class CCV2 extends JFrame implements ActionListener{
             }
         }
     }
-    @SuppressWarnings("unchecked")
+
     private class RemoveItemsListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             try{
-                List<Content<String>> moving = outJList.getSelectedValuesList();
-                for(Content<String> content: moving){
-                    ((DefaultListModel)outJList.getModel()).removeElement(content);
-                    ((DefaultListModel)inJList.getModel()).addElement(content);
+                List<String> moving = outJList.getSelectedValuesList();
+                for(String content: moving){
+                    ((DefaultListModel<String>)outJList.getModel()).removeElement(content);
+                    ((DefaultListModel<String>)inJList.getModel()).addElement(content);
                 }
             }
             catch(Exception removeException){
