@@ -1,0 +1,5 @@
+This directory will be the bousing of the sounds that will be used.
+
+any sounds aded should be based off of single letters and the file name should have the same name as the letter typed
+
+i.e.: n = n.wav, t = t.mp3, etc.
