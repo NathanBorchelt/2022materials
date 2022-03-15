@@ -7,8 +7,6 @@ import javax.swing.JComponent;
 */
 public class RectangleComponent extends JComponent
 {
-   private int xCord;
-   private int yCord;
    private int width;
    private int height;
    private Rectangle box;
@@ -30,6 +28,14 @@ public class RectangleComponent extends JComponent
         box = new Rectangle(x, y, width, height);
    }
 
+   public int getX(){
+      return box.x;
+   }
+
+   public int getY(){
+      return box.y;
+   }
+
    public int getWidth(){
        return width;
    }
@@ -45,13 +51,13 @@ public class RectangleComponent extends JComponent
    }
    /**
       Moves the rectangle by a given amount.
-      @param x the amount to move in the x-direction
-      @param y the amount to move in the y-direction
+      @param dx the amount to move in the x-direction
+      @param dy the amount to move in the y-direction
    */
    public void moveBy(int dx, int dy)
    {
       box.translate(dx, dy);
-      System.out.println(box.getX()+","+box.getY());
+      System.out.println(box.x+","+box.y);
       repaint();
    }
 }
