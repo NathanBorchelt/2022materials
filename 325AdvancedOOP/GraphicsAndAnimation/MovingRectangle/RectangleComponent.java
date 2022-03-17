@@ -47,7 +47,7 @@ public class RectangleComponent extends JComponent
    public void paintComponent(Graphics g)
    {
       Graphics2D g2 = (Graphics2D) g;
-      g2.draw(box);
+      g2.fill(box);;
    }
    /**
       Moves the rectangle by a given amount.

@@ -1,6 +1,12 @@
-public class CustomColor{
+public class CustomColor extends Color{
 
-    //Creates an opaque sRGB color with the specified red, green, and blue values in the range (0.0 - 1.0).
+    /**
+     *Creates an opaque CustomColor color
+     */
+    public CustomColor(){
+        super(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255));
+    }
+
     /**
      *
      * {@inheritDoc}
@@ -52,10 +58,19 @@ public class CustomColor{
         super(r, g,b,a);
     }
 
+    /**
+     *
+     * @param hexCodeRGBA Creates a CustomColor using Hexadecimal input with an alpha channel
+     * @param hasAlpha if the alpha channel is used, if false defaults to "FF"/255
+     */
     public CustomColor(String hexCodeRGBA, boolean hasAlpha){
         super(Integer.parseInt(hexCodeRGBA,16),hasAlpha);
     }
 
+    /**
+     *
+     * @param hexCodeRGB Creates an opaque CustomColor using Hexadecimal input
+     */
     public CustomColor(String hexCodeRGB){
         super(Integer.parseInt(hexCodeRGB,16),false);
     }
@@ -66,9 +81,11 @@ public class CustomColor{
      *This will take 1, 2, 3, 4, 6 character length string to create a string that
      *is 8 characters long, usable with the constructors that take the value as a string
      * @param hexCode
-     * @return String as an 8 character hex string
+     * @return String as an 8 character hex string valued as RRGGBBAA (No pound sign)
      */
     public static String hexConversion(String hexCode){
+        if(hexCode.contains('#'))
+            hexCode = hexCode.substring(1);
         String outString = "";
         byte hexLen = hexCode.length();
         if (hexLen == 1){
