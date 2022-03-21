@@ -1,10 +1,14 @@
-public class CustomColor extends Color{
+import java.util.Random;
+import java.awt.Color;
 
+public class CustomColor extends Color{
+    private static Random random = new Random();
     /**
      *Creates an opaque CustomColor color
      */
     public CustomColor(){
-        super(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255));
+
+        super(random.nextInt(255), random.nextInt(255), random.nextInt(255));
     }
 
     /**
@@ -84,10 +88,10 @@ public class CustomColor extends Color{
      * @return String as an 8 character hex string valued as RRGGBBAA (No pound sign)
      */
     public static String hexConversion(String hexCode){
-        if(hexCode.contains('#'))
+        if(hexCode.contains("#"))
             hexCode = hexCode.substring(1);
         String outString = "";
-        byte hexLen = hexCode.length();
+        int hexLen = hexCode.length();
         if (hexLen == 1){
             for (int i = 0; i < 3; i++) {
                 outString += hexCode + hexCode;
