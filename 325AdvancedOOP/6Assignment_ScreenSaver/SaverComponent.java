@@ -9,4 +9,5 @@ public interface SaverComponent{
     public void newColor();
     public int getWidth();
     public int getHeight();
+    public void validate();
 }

@@ -2,10 +2,13 @@ import java.util.Random;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import java.awt.Color;
+import java.awt.BorderLayout;
 public class BorcheltScreenSaver{
 
     public static int FRAME_WIDTH = 640;
@@ -16,6 +19,7 @@ public class BorcheltScreenSaver{
     public static void main(String[] args){
         random = new Random();
         JFrame frame = new JFrame();
+        frame.setLayout(new BorderLayout());
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setTitle("Borchelt Screen Saver");
         frame.setDefaultCloseOperation(3);
@@ -29,10 +33,11 @@ public class BorcheltScreenSaver{
             else{
                 screenObjects[i] = new CircleComponent(random.nextInt(FRAME_WIDTH), random.nextInt(FRAME_HEIGHT), random.nextInt(100)+50);
             }
+            screenObjects[i].validate();
         }
 
         for(SaverComponent sc: screenObjects){
-            frame.add((JComponent)sc);
+            frame.add((JComponent)sc, BorderLayout.CENTER);
         }
 
         class TimerListener implements ActionListener{

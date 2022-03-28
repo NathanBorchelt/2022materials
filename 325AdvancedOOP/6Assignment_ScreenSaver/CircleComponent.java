@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 public class CircleComponent extends JComponent implements SaverComponent {
     private CustomColor color;
 
+    private Graphics2D g2;
     private int dx;
     private int dy;
     private int radius;
@@ -55,8 +56,9 @@ public class CircleComponent extends JComponent implements SaverComponent {
     }
 
     public void paintComponent(Graphics g){
-        Graphics2D g2 = (Graphics2D) g;
+        g2 = (Graphics2D) g;
         g2.setColor(color);
+        g2.fill(circle);
         g2.draw(circle);
     }
     public void moveBy(int dx, int dy){
