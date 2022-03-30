@@ -69,6 +69,7 @@ public class RectangleComponent extends JComponent  implements SaverComponent{
 
     }
 
+
     public void moveBy(int dx, int dy){
         rectangle.translate(dx, dy);
         repaint();

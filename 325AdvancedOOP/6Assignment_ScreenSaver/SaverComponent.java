@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 public interface SaverComponent{
     public void moveBy(int dx, int dy);
     public int getDx();
@@ -10,4 +12,5 @@ public interface SaverComponent{
     public int getWidth();
     public int getHeight();
     public void validate();
+    public void paintComponent(Graphics g);
 }
