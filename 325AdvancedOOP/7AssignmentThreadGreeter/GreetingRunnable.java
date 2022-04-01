@@ -1,33 +1,37 @@
 import java.util.Date;
 
+import javax.swing.Timer;
+
 /**
    A runnable that repeatedly prints a greeting.
 */
 public class GreetingRunnable implements Runnable
 {
-   private static final int REPETITIONS = 10;
-   private static final int DELAY = 1000;
 
    private String greeting;
+   private int index;
 
    /**
       Constructs the runnable object.
       @param aGreeting the greeting to display
+      @param index the index of the runnable, still using zero based indexing
    */
-   public GreetingRunnable2(String aGreeting)
+   public GreetingRunnable(String aGreeting, int index)
    {
       greeting = aGreeting;
+      this.index = ++index;
+
    }
 
    public void run()
    {
       try
       {
-         for (int i = 1; i <= REPETITIONS; i++)
+         int delay = GreetingThreadRunner.delay;
+         for (int i = 1; i <= GreetingThreadRunner.reps; i++)
          {
-            Date now = new Date();
-            System.out.println(now + " " + greeting);
-            Thread.sleep(DELAY);
+            GreetingThreadRunner.outputArea.append(greeting + index+"\n");
+            Thread.sleep(delay);
          }
       }
       catch (InterruptedException exception)
