@@ -3,25 +3,23 @@ import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import java.util.Timer;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 public class Shapes extends JPanel implements ActionListener{
-    Timer timer = new Timer();
+    private int size;
 
-    int size;
+    private Random random;
 
-    Random random;
+    private Ellipse2D[] ellipseArr;
 
-    Ellipse2D[] ellipseArr;
+    private int[][] veloArr;
 
-    int[] veloArrX;
-    int[] veloArrY;
+    private Color[] colors;
 
-    public Shapes(int size){
+    public Shapes(int size, int width, int height){
         setBackground(Color.BLACK);
 
         random = new Random();
@@ -29,8 +27,16 @@ public class Shapes extends JPanel implements ActionListener{
         this.size = size;
 
         ellipseArr = new Ellipse2D.Double[size];
-        veloArrX = new int[size];
-        veloArrY = new int[size];
+        veloArr = new int[size][2];
+        colors = new Color[size];
+
+        for(int i = 0; i < size; i++){
+            int rad = random.nextInt(50)+25;
+            ellipseArr[i] = new Ellipse2D.Double(random.nextInt(width),random.nextInt(height), rad,rad);
+            veloArr[i][0] = random.nextInt(30)-15;
+            veloArr[i][1] = random.nextInt(30)-15;
+            colors[i] = new CustomColor();
+        }
 
 
 
@@ -42,35 +48,42 @@ public class Shapes extends JPanel implements ActionListener{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         for(int i = 0; i < size; i++){
-            int rad = random.nextInt(100)+33;
-            ellipseArr[i] = new Ellipse2D.Double(random.nextInt(this.getWidth()), random.nextInt(this.getHeight()), rad,rad);
-            veloArrX[i] = random.nextInt(10)-5;
-            veloArrY[i] = random.nextInt(10)-5;
+            g2.setColor(colors[i]);
+            g2.fill(ellipseArr[i]);
         }
-        for(Ellipse2D e2d : ellipseArr){
-            g2.setColor(new CustomColor());
-            g2.fill(e2d);
-        }
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int screenWidth = this.getWidth();
+        int screenHeight = this.getHeight();
         // TODO Auto-generated method stub
         for(int i = 0; i < ellipseArr.length; i++){
-            if(ellipseArr[i].getX() < 0){
-                veloArrX[i] = random.nextInt(5)+1;
+
+            int xPos   = (int) ellipseArr[i].getX();
+            int yPos   = (int) ellipseArr[i].getY();
+            int rad = (int) ellipseArr[i].getWidth();
+
+
+            if(xPos < 0){
+                veloArr[i][0] = random.nextInt(15)+1;
+                colors[i] = new CustomColor();
             }
-            else if(ellipseArr[i].getY() < 0){
-                veloArrY[i] = random.nextInt(5)+1;
+            else if(yPos < 0){
+                veloArr[i][1] = random.nextInt(15)+1;
+                colors[i] = new CustomColor();
             }
-            else if(ellipseArr[i].getX()+ellipseArr[i].getWidth() > this.getWidth()){
-                veloArrX[i] = -random.nextInt(5)+1;
+            else if(xPos + rad > screenWidth){
+                veloArr[i][0] = -random.nextInt(15)-1;
+                colors[i] = new CustomColor();
             }
-            else if(ellipseArr[i].getX()+ellipseArr[i].getHeight() > this.getHeight()){
-                veloArrY[i] = -random.nextInt(5)+1;
+            else if(yPos + rad > screenHeight){
+                veloArr[i][1] = -random.nextInt(15)-1;
+                colors[i] = new CustomColor();
             }
 
-            ellipseArr[i].setFrame(ellipseArr[i].getX()+ veloArrX[i],ellipseArr[i].getY()+ veloArrY[i],ellipseArr[i].getWidth(),ellipseArr[i].getHeight());
+            ellipseArr[i].setFrame(xPos + veloArr[i][0], yPos + veloArr[i][1], rad, rad);
             repaint();
         }
 
