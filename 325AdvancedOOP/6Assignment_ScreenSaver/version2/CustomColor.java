@@ -12,7 +12,6 @@ public class CustomColor extends Color{
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     public CustomColor(float r, float g, float b){
@@ -21,7 +20,6 @@ public class CustomColor extends Color{
 
 
     /**
-     *
      * {@inheritDoc}
      */
     public CustomColor(float r, float g, float b, float a){
@@ -30,7 +28,6 @@ public class CustomColor extends Color{
 
 
     /**
-     *
      * {@inheritDoc}
      */
     public CustomColor(int rgb){
@@ -38,7 +35,6 @@ public class CustomColor extends Color{
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     public CustomColor(int rgba, boolean hasAlpha){
@@ -46,7 +42,6 @@ public class CustomColor extends Color{
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     public CustomColor(int r, int g, int b){
@@ -55,7 +50,6 @@ public class CustomColor extends Color{
 
 
     /**
-     *
      * {@inheritDoc}
      */
     public CustomColor(int r, int g, int b, int a){
@@ -63,7 +57,6 @@ public class CustomColor extends Color{
     }
 
     /**
-     *
      * @param hexCodeRGBA Creates a CustomColor using Hexadecimal input with an alpha channel
      * @param hasAlpha if the alpha channel is used, if false defaults to "FF"/255
      */
@@ -72,7 +65,6 @@ public class CustomColor extends Color{
     }
 
     /**
-     *
      * @param hexCodeRGB Creates an opaque CustomColor using Hexadecimal input
      */
     public CustomColor(String hexCodeRGB){
