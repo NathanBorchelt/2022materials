@@ -53,19 +53,25 @@ public class Shapes extends JPanel implements ActionListener{
             y = (int) c.getY();
             diameter = c.getDiameter();
 
+            //left side detection
             if(x < 0){
                 c.setXVelo(random.nextInt(15)+1);
                 c.setColor(new CustomColor());
             }
+
+            //top side detection
             if(y < 0){
                 c.setYVelo(random.nextInt(15)+1);
                 c.setColor(new CustomColor());
             }
 
+            //right side detection
             if(x + diameter > screenWidth){
                 c.setXVelo(-random.nextInt(15)+1);
                 c.setColor(new CustomColor());
             }
+
+            //bottom side detection
             if(y + diameter > screenHeight){
                 c.setYVelo(-random.nextInt(15)+1);
                 c.setColor(new CustomColor());
