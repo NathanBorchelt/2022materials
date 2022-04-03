@@ -8,7 +8,7 @@ public class CustomColor extends Color{
      */
     public CustomColor(){
 
-        super(random.nextInt(255), random.nextInt(255), random.nextInt(255));
+        super(random.nextInt(256), random.nextInt(256), random.nextInt(256));
     }
 
     /**

@@ -6,9 +6,14 @@ import javax.swing.Timer;
 public class BorcheltScreenSaver extends JFrame{
 
     public BorcheltScreenSaver(){
-        int numShapes = 500;
+        int numShapes = 200;
         setLayout(null);
-        setSize(640,480);
+
+        //https://stackoverflow.com/a/11570414
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setUndecorated(true);
+        setVisible(true);
+
         Shapes shapes = new Shapes(numShapes, this.getWidth(), this.getHeight());
         setContentPane(shapes);
         setVisible(true);
