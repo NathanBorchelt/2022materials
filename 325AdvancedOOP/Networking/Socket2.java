@@ -88,6 +88,8 @@ public class Socket2 extends Socket {
     static final int MPP_PORT = 218;
     static final int IMAP3 = 220;
     static final int ESRO_PORT = 259;
+    static final int ARCISDMS_PORT = 262;
+    static final int BGMP_PORT = 264;
     static final int HTTPS_Port = 443;
     static final int ISA_KMP_PORT = 500;
     static final int TCP_IP_PORT = 3360;
