@@ -32,7 +32,6 @@ public class Shapes extends JPanel implements ActionListener{
 
     @Override
     protected void paintComponent(Graphics g) {
-        // TODO Auto-generated method stub
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         for(Circle c: circleArr){
@@ -67,13 +66,13 @@ public class Shapes extends JPanel implements ActionListener{
 
             //right side detection
             if(x + diameter > screenWidth){
-                c.setXVelo(-random.nextInt(15)+1);
+                c.setXVelo(-random.nextInt(15)-1);
                 c.setColor(new CustomColor());
             }
 
             //bottom side detection
             if(y + diameter > screenHeight){
-                c.setYVelo(-random.nextInt(15)+1);
+                c.setYVelo(-random.nextInt(15)-1);
                 c.setColor(new CustomColor());
             }
 

@@ -6,7 +6,7 @@ import javax.swing.Timer;
 public class BorcheltScreenSaver extends JFrame{
 
     public BorcheltScreenSaver(){
-        int numShapes = 200;
+        int numShapes = 500;
         setLayout(null);
 
         //https://stackoverflow.com/a/11570414

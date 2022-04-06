@@ -10,8 +10,8 @@ public class Recursion_nborchelt {
     }
 
    public static double fib(int n){
-        if(n <= 1) return n;
-        else if(n < 1) throw new RuntimeException("n must be a positive integer (n >= 1)");
+        if(n < 1) throw new RuntimeException("n must be a positive integer (n >= 1)");
+        else if(n <= 1) return n;
 
         return fib(n-1) + fib(n-2);
     }
