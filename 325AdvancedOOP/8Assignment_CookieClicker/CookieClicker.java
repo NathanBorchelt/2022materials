@@ -7,12 +7,18 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+//scrapper code from https://www.geeksforgeeks.org/download-web-page-using-java/
+import java.net.URL;
+import java.net.MalformedURLException;
+
 public class CookieClicker {
     public static void main(String[] args)throws IOException, AWTException, InterruptedException, URISyntaxException{
 
         Robot bot = new Robot();
 
         String website = "https://orteil.dashnet.org/cookieclicker/";
+
+        URL url = new URL(website);
 
         String[] browsers = {"firefox","chrome","iexplore"};
 

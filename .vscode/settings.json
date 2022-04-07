@@ -2,7 +2,8 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": true,
     "java.project.sourcePaths": [
+        "325AdvancedOOP/MultiThreading/LockingBank",
         "325AdvancedOOP/6Assignment_ScreenSaver/version2",
-        "325AdvancedOOP/MultiThreading/LockingBank"
+        "Radix"
     ]
 }

@@ -9,7 +9,7 @@ public class Search {
         if(intArr[mid] == key){
             return mid;
         }
-        else if(min==max){
+        else if(min-max <= 0){
             return -1;
         }
         else if(intArr[mid] < key){
