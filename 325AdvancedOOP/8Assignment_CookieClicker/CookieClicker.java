@@ -32,7 +32,9 @@ public class CookieClicker {
         //https://www.tutorialspoint.com/how-to-read-the-contents-of-a-webpage-into-a-string-in-java
         Scanner sc = new Scanner(url.openStream());
 
-        while
+        while(sc.hasNext()){
+
+        }
 
 
 
