@@ -14,21 +14,26 @@ import java.net.MalformedURLException;
 public class CookieClicker {
     public static void main(String[] args)throws IOException, AWTException, InterruptedException, URISyntaxException{
 
+        //screen size info
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int sWidth = screenSize.getWidth();
+        int sHeight = screenSize.getHeight();
+
         Robot bot = new Robot();
 
         String website = "https://orteil.dashnet.org/cookieclicker/";
 
         URL url = new URL(website);
 
-        String[] browsers = {"firefox","chrome","iexplore"};
-
-        Runtime run;
-
-        boolean appRunning = false;
-
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             Desktop.getDesktop().browse(new URI(website));
         }
+
+        //https://www.tutorialspoint.com/how-to-read-the-contents-of-a-webpage-into-a-string-in-java
+        Scanner sc = new Scanner(url.openStream());
+
+        while
+
 
 
 
