@@ -3,26 +3,31 @@ import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) {
-        int length = 10000000;
-        int[] testArr = new int[length];
+        int length = 50;
+        int charLen = 5;
+        //int[] testArr = new int[length];
+        String[] strArray = new String[length];
 
         Random random = new Random();
 
         for(int i = 0; i < length; i++){
-            testArr[i] = random.nextInt(Integer.MAX_VALUE);
-            //testArr[i] = random.nextInt(100);
+            String outString = "";
+            for(int j = 0; j < charLen; j++){
+                if(random.nextBoolean()){
+                    outString += (char) (random.nextInt(26)+65);
+                }
+                else{
+                    outString += (char) (random.nextInt(26)+97);
+                }
+            }
+            strArray[i] = outString;
         }
-        //System.out.println(Arrays.toString(testArr));
-        System.out.println(inOrder(testArr));
 
-        System.out.println("Timer Start");
-        long startTime = System.currentTimeMillis();
-        RadixSort.intSort(testArr);
-        long endTime = System.currentTimeMillis();
-        System.out.println("Execution Time: "+ ((endTime - startTime)/1000.0) + " seconds");
+        System.out.println(Arrays.toString(strArray));
 
-        //System.out.println(Arrays.toString(testArr));
-        System.out.println(inOrder(testArr));
+        RadixSort.sort(strArray);
+
+        System.out.println(Arrays.toString(strArray));
     }
 
     public static boolean inOrder(int[] array){
