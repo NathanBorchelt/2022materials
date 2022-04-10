@@ -1,11 +1,14 @@
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.*;
 import java.util.Scanner;
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.awt.event.InputEvent;
 
 //scrapper code from https://www.geeksforgeeks.org/download-web-page-using-java/
 import java.net.URL;
@@ -16,25 +19,30 @@ public class CookieClicker {
 
         //screen size info
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int sWidth = screenSize.getWidth();
-        int sHeight = screenSize.getHeight();
+        int sWidth = (int) screenSize.getWidth();
+        int sHeight = (int) screenSize.getHeight();
 
         Robot bot = new Robot();
 
         String website = "https://orteil.dashnet.org/cookieclicker/";
 
-        URL url = new URL(website);
 
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             Desktop.getDesktop().browse(new URI(website));
         }
 
-        //https://www.tutorialspoint.com/how-to-read-the-contents-of-a-webpage-into-a-string-in-java
-        Scanner sc = new Scanner(url.openStream());
-
-        while(sc.hasNext()){
-
+        System.out.println("5 second sleep to assure page is open and loaded");
+        int cookieX = (int) (sWidth * 0.16);
+        int cookieY = (int) (sHeight * 0.5);
+        Thread.sleep(5000);
+        for(int i = 0; i <1000; i++){
+            bot.mouseMove(cookieX, cookieY);
+            bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            Thread.sleep(20);
+            bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+            System.out.println("Click #" + (i+1));
         }
+
 
 
 
