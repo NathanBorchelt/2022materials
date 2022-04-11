@@ -157,8 +157,12 @@ public class RadixSort {
 
         for(short m = 0; m < maxLen; m++){
             for(int n = 0; n < arrayIn.length; n++){
-                String checkStr = String.format("%"+maxLen+"s", arrayIn[n]);
-                switch(checkStr.charAt(maxLen - m - 1)){
+                String checkStr = String.format("%-"+maxLen+"s", arrayIn[n]);
+                char checkLtr = checkStr.charAt(maxLen - m - 1);
+                switch(checkLtr){
+                    case ' ':
+                        letterPadding.add(checkStr);
+                        break;
                     case 'a':
                     case 'A':
                         letterA.add(arrayIn[n]);
@@ -264,18 +268,17 @@ public class RadixSort {
                         letterZ.add(arrayIn[n]);
                         break;
                 }
+            }
 
-                mixCounter = 0;
+            mixCounter = 0;
 
                 for(LinkedList<String> sLL : alphabetList){
                     for(String s : sLL){
-                        arrayIn[mixCounter] = s;
+                        arrayIn[mixCounter] = s.trim();
                         mixCounter++;
                     }
                     sLL.clear();
                 }
-
-            }
         }
 
     }

@@ -18,6 +18,7 @@ public class CookieClicker {
     public static void main(String[] args)throws IOException, AWTException, InterruptedException, URISyntaxException{
 
         //screen size info
+        //https://www.geeksforgeeks.org/java-program-to-print-screen-resolution/
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int sWidth = (int) screenSize.getWidth();
         int sHeight = (int) screenSize.getHeight();
@@ -38,7 +39,7 @@ public class CookieClicker {
         for(int i = 0; i <1000; i++){
             bot.mouseMove(cookieX, cookieY);
             bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            Thread.sleep(20);
+            Thread.sleep(2);
             bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
             System.out.println("Click #" + (i+1));
         }
