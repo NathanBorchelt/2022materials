@@ -33,16 +33,16 @@ public class Nathan_Borchelt_CookieClicker {
             System.exit(0);
         }
 
-        System.out.println("5 second sleep to assure page is open and loaded");
+        System.out.println("15 second sleep to assure page is open and loaded");
         //what seem to be constant coordinates considering cookie clicker is built of divs with percentages
         int cookieX = (int) (sWidth * 0.16);
         int cookieY = (int) (sHeight * 0.5);
-        Thread.sleep(5000);
-        for(int i = 0; i <10; i++){
+        Thread.sleep(15000);
+        for(int i = 0; i <1000; i++){
             bot.mouseMove(cookieX, cookieY);
             bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            //14 ms has been the fastest i can run it, 20 allows for vatiation due to other task
-            Thread.sleep(20);
+            //14 ms has been the fastest i can run it, 15 allows for variation due to other task
+            Thread.sleep(15);
             bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
             //5ms delay to assure release of mouse
             Thread.sleep(5);
