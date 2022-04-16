@@ -12,12 +12,10 @@ public class BinaryTree<E extends Comparable>{
             return true;
         }
 
-        boolean result;
-
-        if(root.hasRightNode() && root.getValue().compareTo(value) >= 0){
+        if(root.hasRightNode() && root.getValue().compareTo(value) <= 0){
             return contains(root.getRightNode(), value);
         }
-        else if(root.hasLeftNode() && root.getValue().compareTo(value) < 0){
+        else if(root.hasLeftNode() && root.getValue().compareTo(value) > 0){
             return contains(root.getLeftNode(), value);
         }
         return false;
@@ -28,53 +26,51 @@ public class BinaryTree<E extends Comparable>{
             return true;
         }
 
-        boolean result;
-
-        if(root.hasRightNode() && root.getValue().compareTo(value) >= 0){
-            return contains(root.getRightNode(), value);
+        if(node.hasRightNode() && node.getValue().compareTo(value) <= 0){
+            return contains(node.getRightNode(), value);
         }
-        else if(root.hasLeftNode() && root.getValue().compareTo(value) < 0){
-            return contains(root.getLeftNode(), value);
+        else if(node.hasLeftNode() && node.getValue().compareTo(value) > 0){
+            return contains(node.getLeftNode(), value);
         }
         return false;
     }
 
     public void add(E value){
         size++;
-        if(root.hasRightNode() && root.getValue().compareTo(value) >= 0){
+        if(root.hasRightNode() && root.getValue().compareTo(value) <= 0){
             add(value, root.getRightNode());
         }
         else{
-            if(root.getValue().compareTo(value) >= 0){
+            if(root.getValue().compareTo(value) <= 0){
                 root.setRightNode(value);
             }
         }
 
-        if(root.hasLeftNode() && root.getValue().compareTo(value) < 0){
+        if(root.hasLeftNode() && root.getValue().compareTo(value) > 0){
             add(value, root.getLeftNode());
         }
         else{
-            if(root.getValue().compareTo(value) < 0){
+            if(root.getValue().compareTo(value) > 0){
                 root.setLeftNode(value);
             }
         }
     }
 
     private void add(E value, BinaryNode<E> currentNode){
-        if(currentNode.hasRightNode() && root.getValue().compareTo(value) >= 0){
+        if(currentNode.hasRightNode() && currentNode.getValue().compareTo(value) <= 0){
             add(value, currentNode.getRightNode());
         }
         else{
-            if(currentNode.getValue().compareTo(value) >= 0){
+            if(currentNode.getValue().compareTo(value) <= 0){
                 currentNode.setRightNode(value);
             }
         }
 
-        if(currentNode.hasLeftNode() && currentNode.getValue().compareTo(value) < 0){
+        if(currentNode.hasLeftNode() && currentNode.getValue().compareTo(value) > 0){
             add(value, currentNode.getLeftNode());
         }
         else{
-            if(currentNode.getValue().compareTo(value) < 0){
+            if(currentNode.getValue().compareTo(value) > 0){
                 currentNode.setLeftNode(value);
             }
         }
