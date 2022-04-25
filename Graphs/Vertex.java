@@ -1,22 +1,21 @@
 import java.util.ArrayList;
 
-public class Vertex implements Graph{
-    private String name;
+public class Vertex<T> implements Graph{
+    private T value;
     private int weight;
-    private ArrayList<Vertex> connections;
+    private Vertex<T> neighbor;
+
     public Vertex(String name){
         this.name = name;
         this.weight = 1;
-        connections = new ArrayList<>();
     }
     public Vertex(String name, int weight){
         this.name = name;
         this.weight = weight;
-        connections = new ArrayList<>();
     }
 
-    public void connect(Vertex v){
-        connections.add(v);
+    public void connect(Vertex<T> v){
+        while(neighbor)
     }
     public void sever(Vertex v){
         connections.remove(v);
