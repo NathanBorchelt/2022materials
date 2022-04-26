@@ -9,13 +9,10 @@ public class Vertex<T> implements Graph{
         this.name = name;
         this.weight = 1;
     }
-    public Vertex(String name, int weight){
-        this.name = name;
-        this.weight = weight;
-    }
+
 
     public void connect(Vertex<T> v){
-        while(neighbor)
+
     }
     public void sever(Vertex v){
         connections.remove(v);
