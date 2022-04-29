@@ -1,0 +1,58 @@
+Nathan Borchelt
+CSC325 Assignment 9
+
+based off MySQL
+
+/**
+*
+*The DEFAULTs are so that the data is never empty, and while it may be a
+*little more annoying to try to remember all the number to type of attack and
+*weapon types, I feel it would be easier to implement compared to doing every
+*comparison based off of strings
+*
+*/
+
+#############################
+
+
+1.
+CREATE TABLE Enemies(EnemyID INT NOT NULL,
+    Name VARCHAR(20) DEFAULT 'Enemy',
+    Location VARCHAR(40) NOT NULL,
+    Hit_Points INT DEFAULT 1,
+    Attack INT DEFAULT 0,
+    Defense INT DEFAULT 0,
+    ItemID VARCHAR(20) DEFAULT NULL,
+    PRIMARY KEY (EnemyID),
+    FOREIGN KEY (ItemID) REFERENCES Items (ItemID));
+
+2.
+CREATE TABLE Items(ItemID INT NOT NULL,
+    Name VARCHAR(20) DEFAULT 'Weapon',
+    Type VARCHAR(20) NOT NULL,
+    PRIMARY KEY (ItemID));
+
+3.
+The primary key is the EnemyID and the foreign key is the ItemID
+
+4.
+INSERT INTO Enemies(136, 'hobgoblin', 'the dark woods', 140, 145, 130, 758);
+
+INSERT INTO Items(2107, "gold key', 'quest item');
+
+5.
+SELECT Enemies.Name FROM Enemies, Items WHERE Enemies.ItemID=Items.ItemID AND Item.Type='food';
+
+6. (java code)
+
+Statement stat = connection.createStatement();
+
+stat.execute("CREATE TABLE Enemies(EnemyID INT NOT NULL, Name VARCHAR(20) DEFAULT 'Enemy', Location VARCHAR(40) NOT NULL, Hit_Points INT DEFAULT 1, Attack INT DEFAULT 0, Defense INT DEFAULT 0, ItemID VARCHAR(20) DEFAULT NULL, PRIMARY KEY (EnemyID), FOREIGN KEY (ItemID) REFERENCES Items (ItemID))");
+
+stat.execute("CREATE TABLE Items(ItemID INT NOT NULL, Name VARCHAR(20) DEFAULT 'Weapon', Type VARCHAR(20) NOT NULL, PRIMARY KEY (ItemID))");
+
+stat.execute("INSERT INTO Enemies(136, 'hobgoblin', 'the dark woods', 140, 145, 130, 758);");
+
+stat.execute("INSERT INTO Items(2107, "gold key', 'quest item')");
+
+ResultSet result = stat.executeQuery("SELECT Enemies.Name FROM Enemies, Items WHERE Enemies.ItemID=Items.ItemID AND Item.Type='food'");
