@@ -16,7 +16,7 @@ based off MySQL
 
 
 1.
-CREATE TABLE Enemies(EnemyID INT NOT NULL,
+CREATE TABLE Enemies(EnemyID INT NOT NULL UNIQUE,
     Name VARCHAR(20) DEFAULT 'Enemy',
     Location VARCHAR(40) NOT NULL,
     Hit_Points INT DEFAULT 1,
@@ -27,7 +27,7 @@ CREATE TABLE Enemies(EnemyID INT NOT NULL,
     FOREIGN KEY (ItemID) REFERENCES Items (ItemID));
 
 2.
-CREATE TABLE Items(ItemID INT NOT NULL,
+CREATE TABLE Items(ItemID INT NOT NULL UNIQUE,
     Name VARCHAR(20) DEFAULT 'Weapon',
     Type VARCHAR(20) NOT NULL,
     PRIMARY KEY (ItemID));
@@ -36,9 +36,9 @@ CREATE TABLE Items(ItemID INT NOT NULL,
 The primary key is the EnemyID and the foreign key is the ItemID
 
 4.
-INSERT INTO Enemies(136, 'hobgoblin', 'the dark woods', 140, 145, 130, 758);
+INSERT INTO Enemies VALUES (136, 'hobgoblin', 'the dark woods', 140, 145, 130, 758);
 
-INSERT INTO Items(2107, "gold key', 'quest item');
+INSERT INTO Items VALUES (2107, "gold key', 'quest item');
 
 5.
 SELECT Enemies.Name FROM Enemies, Items WHERE Enemies.ItemID=Items.ItemID AND Item.Type='food';
@@ -47,9 +47,9 @@ SELECT Enemies.Name FROM Enemies, Items WHERE Enemies.ItemID=Items.ItemID AND It
 
 Statement stat = connection.createStatement();
 
-stat.execute("CREATE TABLE Enemies(EnemyID INT NOT NULL, Name VARCHAR(20) DEFAULT 'Enemy', Location VARCHAR(40) NOT NULL, Hit_Points INT DEFAULT 1, Attack INT DEFAULT 0, Defense INT DEFAULT 0, ItemID VARCHAR(20) DEFAULT NULL, PRIMARY KEY (EnemyID), FOREIGN KEY (ItemID) REFERENCES Items (ItemID))");
+stat.execute("CREATE TABLE Enemies(EnemyID INT NOT NULL UNIQUE, Name VARCHAR(20) DEFAULT 'Enemy', Location VARCHAR(40) NOT NULL, Hit_Points INT DEFAULT 1, Attack INT DEFAULT 0, Defense INT DEFAULT 0, ItemID VARCHAR(20) DEFAULT NULL, PRIMARY KEY (EnemyID), FOREIGN KEY (ItemID) REFERENCES Items (ItemID))");
 
-stat.execute("CREATE TABLE Items(ItemID INT NOT NULL, Name VARCHAR(20) DEFAULT 'Weapon', Type VARCHAR(20) NOT NULL, PRIMARY KEY (ItemID))");
+stat.execute("CREATE TABLE Items(ItemID INT NOT NULL UNIQUE, Name VARCHAR(20) DEFAULT 'Weapon', Type VARCHAR(20) NOT NULL, PRIMARY KEY (ItemID))");
 
 stat.execute("INSERT INTO Enemies(136, 'hobgoblin', 'the dark woods', 140, 145, 130, 758);");
 
